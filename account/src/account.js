@@ -1,13 +1,17 @@
-int balance = 100;
+var balance = 100;
 
 function getBalance (res) {
-    res = balance;
+    result = { "balance" : balance }
+
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(result));
 }
 
 
 module.exports = {
-    getBalance: function(req, res) {
+    get: function(req, res) {
         console.log ("Retrieving balance ")
         getBalance(res)
+        console.log ("Returning result")
     }
 }
