@@ -3,8 +3,6 @@
     "main": "server.js",
     "dependencies": {
         "express": "*",
-        "body-parser": "*",
-        "mysql": "*",
-        "node-rest-client": "*"
+        "body-parser": "*"
     }
 }

@@ -3,6 +3,7 @@
     "main": "server.js",
     "dependencies": {
         "express": "*",
-        "body-parser": "*"
+        "body-parser": "*",
+        "node-rest-client": "*"
     }
 }
