@@ -5,7 +5,7 @@ replicaCount: 1
 image:
   repository: patrocinio/microbank-balance
   tag: 1
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 service:
   name: balance
   type: NodePort

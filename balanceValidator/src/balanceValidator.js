@@ -30,13 +30,17 @@ function obtainBalance(res, account) {
   url = base_url + account;
   console.log ("URL: " + url);
 
-  client.get(url, function(data, response) {
+  var req = client.get(url, function(data, response) {
     parseBalance (res, data);
     counter--;
     if (counter == 0) {
       checkSum (res);
     }
-  })
+  });
+
+  req.on('error', function (err) {
+    console.log('=== obtainBalance request error', err);
+  });
 }
 
 function obtainBalances(res, data) {
