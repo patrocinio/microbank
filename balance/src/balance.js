@@ -4,7 +4,7 @@ var client = new Client ();
 
 function getBalance (res, account) {
 
-	var url = "http://" + account + "-" + account + "/balance";
+	var url = "http://microbank-" + account + "/balance";
 	console.log ("URL: " + url);
 	client.get(url, function (data, response) {
 	  res.setHeader('Content-Type', 'application/json');

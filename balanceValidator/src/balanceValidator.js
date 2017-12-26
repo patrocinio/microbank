@@ -24,7 +24,7 @@ function checkSum(res){
 }
 
 function obtainBalance(res, account) {
-  var base_url = "http://balance-balance.microbank.svc.cluster.local/balance/";
+  var base_url = "http://microbank-balance.microbank.svc.cluster.local/balance/";
 
   console.log ("Obtaining balance for account " + account);
   url = base_url + account;
@@ -52,7 +52,7 @@ function obtainBalances(res, data) {
 }
 
 function getAccounts (res) {
-  var url = "http://account-system-account-system.microbank.svc.cluster.local/accounts";
+  var url = "http://microbank-account-system.microbank.svc.cluster.local/accounts";
   client.get(url, function (data, response) {
     console.log ("data:" + data);
     obtainBalances (res, data);
