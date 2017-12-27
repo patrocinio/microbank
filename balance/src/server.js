@@ -8,6 +8,7 @@ var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 var balance    = require('./balance');
+var chaos      = require('./chaos_router.js');
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -18,7 +19,11 @@ var port = process.env.PORT || 80;        // set our port
 
 // ROUTES FOR OUR API
 // =============================================================================
+
 var router = express.Router();              // get an instance of the express Router
+
+
+app.use (chaos);
 
 // test route to make sure everything is working (accessed at GET http://localhost:80/api)
 router.get('/balance/:account', function(req, res) {
@@ -26,6 +31,7 @@ router.get('/balance/:account', function(req, res) {
 });
 
 router.get('/', function(req, res) {
+	console.log ("Returning healthy")
 	res.send("I'm healthy")
 })
 

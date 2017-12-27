@@ -2,4 +2,4 @@ NAME=balance
 
 ./create_namespace.sh microbank
 helm delete --purge $NAME
-helm install -n $NAME ./balancels
+helm install -n $NAME ./microbank/charts/balance

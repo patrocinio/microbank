@@ -1,6 +1,4 @@
-var Client = require('node-rest-client').Client;
-
-var client = new Client ();
+var client = require('./chaos_rest.js')
 
 function getBalance (res, account) {
 
@@ -8,8 +6,8 @@ function getBalance (res, account) {
 	console.log ("URL: " + url);
 	client.get(url, function (data, response) {
 	  res.setHeader('Content-Type', 'application/json');
-  	  res.send(JSON.stringify(data));
-  	});
+  	res.send(JSON.stringify(data));
+  });
 
 }
 
