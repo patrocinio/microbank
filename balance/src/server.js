@@ -8,7 +8,7 @@ var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 var balance    = require('./balance');
-var chaos      = require('./chaos_router.js');
+var chaos      = require('./chaos_router/chaos_router.js');
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
