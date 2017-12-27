@@ -15,7 +15,7 @@ function parseBalance(res, data) {
 }
 
 function checkSum(res){
-  res.setHeader('Content-Type', 'application/json');
+  res.setHeader('Content-Type', 'text/plain');
   if (sum == expected) {
     res.send ("Sum and expected balances match: " + sum);
   } else {

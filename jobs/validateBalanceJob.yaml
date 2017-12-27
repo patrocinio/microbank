@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: validate-balance
+spec:
+  template:
+    metadata:
+      name: validate-balance
+    spec:
+      containers:
+      - name: validate-balance
+        image: patrocinio/microbank-validate-balance:1
+        imagePullPolicy: Always
+      restartPolicy: Never
