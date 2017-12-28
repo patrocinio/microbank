@@ -1,3 +1,3 @@
 IMAGE=patrocinio/microbank-balance-validator:1
-docker build -t $IMAGE .
+docker build -t $IMAGE ../src/balanceValidator
 

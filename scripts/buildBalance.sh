@@ -1,3 +1,4 @@
+cd ../src/balance
 cp -rf ../common/* src/
 
 IMAGE=patrocinio/microbank-balance:1
