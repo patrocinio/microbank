@@ -1,6 +1,8 @@
 var Client = require('node-rest-client').Client;
 var client = new Client ();
 
-function get(url, f) {
-	client.get(url, f);
+module.exports = {
+    get: function (url, f) {
+		client.get(url, f);
+	}
 }
