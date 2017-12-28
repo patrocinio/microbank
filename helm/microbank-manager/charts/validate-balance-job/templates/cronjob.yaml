@@ -1,0 +1,17 @@
+apiVersion: batch/v2alpha1
+kind: CronJob
+metadata:
+  name: validate-balance-job
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    metadata:
+      name: validate-balance
+    spec:
+      template:
+        spec:
+          containers:
+          - name: validate-balance
+            image: patrocinio/microbank-validate-balance:1
+            imagePullPolicy: Always
+          restartPolicy: OnFailure
