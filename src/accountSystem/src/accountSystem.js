@@ -3,6 +3,7 @@ var balance = 100;
 var accounts = [];
 
 function getAccounts (res) {
+    console.log ("accounts: " + accounts);
     result = { "accounts" : accounts }
 
     res.setHeader('Content-Type', 'application/json');
@@ -12,6 +13,7 @@ function getAccounts (res) {
 function registerAccount (res, account) {
 	console.log ("Registering account " + account);
     accounts.push(account);
+    console.log ("accounts: " + accounts);
 	res.send ("Account registered");
 }
 
