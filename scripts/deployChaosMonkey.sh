@@ -1,5 +1,4 @@
 NAME=chaos-monkey
 
-./switchNamespace.sh default
-helm delete --purge $NAME
+./stopChaosMonkey.sh
 helm install -n $NAME ../helm/chaos-monkey

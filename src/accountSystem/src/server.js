@@ -26,11 +26,15 @@ app.use (chaos);
 
 // test route to make sure everything is working (accessed at GET http://localhost:80/api)
 router.get('/accounts', function(req, res) {
-	accountSystem.get(req, res)
+	accountSystem.get(req, res);
 });
 
 router.get('/', function(req, res) {
-	res.send("I'm healthy")
+	res.send("I'm healthy");
+});
+
+router.get('/register/:account', function(req, res) {
+	accountSystem.register(req, res);
 })
 
 // more routes for our API will happen here

@@ -14,9 +14,9 @@ function getBalance (res, account) {
 
 module.exports = {
     get: function(req, res) {
-    	account = req.params.account
-        console.log ("Retrieving balance for account " + account)
-        getBalance(res, account)
-        console.log ("Returning result")
+    	account = req.params.account;
+      console.log ("Retrieving balance for account " + account);
+      getBalance(res, account);
+      console.log ("Returning result");
     }
 }

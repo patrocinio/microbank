@@ -1,3 +1,6 @@
+var client = require('./chaos_rest.js');
+var os = require('os');
+
 var balance = 100;
 
 function getBalance (res) {
@@ -7,6 +10,26 @@ function getBalance (res) {
     res.send(JSON.stringify(result));
 }
 
+function obtainAccountName () {
+	hostname = os.hostname();
+	array = hostname.split("-");
+
+	// Normal name: microbank-john-account-...
+	return array[1] + "-" + array[2];
+}
+
+function registerAccount () {
+	name = obtainAccountName();
+	console.log ("Registering " + name);
+
+	var url = "http://microbank-account-system/register/" + name;
+	console.log ("URL: " + url);
+	client.get(url, function (data, response) {
+  });
+
+}
+
+registerAccount();
 
 module.exports = {
     get: function(req, res) {
