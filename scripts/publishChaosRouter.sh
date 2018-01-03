@@ -1,2 +1,2 @@
-cd ../src/common/chaos_router
+cd ../src/common/latest/chaos_router
 npm publish
