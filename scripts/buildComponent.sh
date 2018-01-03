@@ -1,7 +1,10 @@
-echo Building component $1
-cd ../src/$1
+COMPONENT=$1
+VERSION=$2
+
+echo Building component $COMPONENT at version $VERSION
+cd ../src/$COMPONENT
 cp -rf ../common/* src/
 
-IMAGE=patrocinio/microbank-$1:latest
-docker build --build-arg version=1.0 -t $IMAGE .
+IMAGE=patrocinio/microbank-$COMPONENT:$VERSION
+docker build --build-arg version=$VERSION -t $IMAGE .
 
