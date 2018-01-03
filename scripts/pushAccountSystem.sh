@@ -1,3 +1,3 @@
-IMAGE=patrocinio/microbank-account-system:1
+IMAGE=patrocinio/microbank-account-system:latest
 docker push $IMAGE
 

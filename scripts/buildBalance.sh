@@ -1,6 +1,6 @@
 cd ../src/balance
 cp -rf ../common/* src/
 
-IMAGE=patrocinio/microbank-balance:1
+IMAGE=patrocinio/microbank-balance:latest
 docker build -t $IMAGE .
 

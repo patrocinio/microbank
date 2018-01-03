@@ -1,3 +1,3 @@
-IMAGE=patrocinio/microbank-validate-balance:1
+IMAGE=patrocinio/microbank-validate-balance:latest
 docker build -t $IMAGE ../src/validateBalanceJob
 

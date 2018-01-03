@@ -4,7 +4,7 @@
 replicaCount: 1
 image:
   repository: patrocinio/microbank-account
-  tag: 1
+  tag: latest
   pullPolicy: Always
 service:
   name: john-account

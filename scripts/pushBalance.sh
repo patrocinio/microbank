@@ -1,3 +1,3 @@
-IMAGE=patrocinio/microbank-balance:1
+IMAGE=patrocinio/microbank-balance:latest
 docker push $IMAGE
 
