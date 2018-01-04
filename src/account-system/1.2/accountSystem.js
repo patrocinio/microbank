@@ -29,7 +29,7 @@ function persistAccount (account) {
 
 function registerAccount (res, account) {
 	console.log ("Registering account " + account);
-    if (hasAccount) {
+    if (hasAccount (account)) {
         console.log ("Account already found");
     } else {
         persistAccount(account);

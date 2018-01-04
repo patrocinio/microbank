@@ -2,8 +2,6 @@
     "name": "node-api",
     "main": "server.js",
     "dependencies": {
-        "express": "*",
-        "body-parser": "*",
         "node-rest-client": "*"
     }
 }
