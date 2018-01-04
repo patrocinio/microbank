@@ -28,8 +28,6 @@ function registerAccount (res, account) {
     accounts.push(account);
     console.log ("accounts: " + accounts);
 	res.send ("Account registered");
-
-    retrieveAccounts();
 }
 
 function retrieveAccounts () {
