@@ -97,3 +97,5 @@ networkPolicy:
 service:
   annotations: {}
   loadBalancerIP:
+  externalPort: 6379
+  internalPort: 6379

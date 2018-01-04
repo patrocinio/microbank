@@ -3,7 +3,7 @@ var balance = 100;
 var accounts = [];
 
 var redis = require("redis");
-var client = redis.createClient("redis://microbank-redis");
+var client = redis.createClient("redis://microbank-account-system-redis");
 
 client.on("error", function (err) {
     console.log("==> Error " + err);
