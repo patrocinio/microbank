@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: display-accounts
+spec:
+  template:
+    metadata:
+      name: display-accounts
+    spec:
+      containers:
+      - name: display-accouns
+        image: patrocinio/microbank-display-accounts-job:latest
+        imagePullPolicy: Always
+      restartPolicy: Never

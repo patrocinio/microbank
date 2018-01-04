@@ -5,7 +5,7 @@ replicaCount: 1
 image:
   repository: patrocinio/microbank-account
   tag: latest
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 service:
   name: mary-account
   type: NodePort
