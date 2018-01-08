@@ -2,6 +2,7 @@ var Client = require('node-rest-client').Client;
 var client = new Client ();
 
 var INITIAL_BALANCE=100;
+var NUMBER_OF_ACCOUNTS = 2;
 
 var sum;
 var counter;
@@ -59,10 +60,20 @@ function obtainBalances(res, data) {
   }
 }
 
+function checkAccountNumber(res, data) {
+  var accounts = data.accounts;
+  console.log ("Obtainining balance... Number of accounts: " + accounts.length);
+
+  if (accounts.length != NUMBER_OF_ACCOUNTS) {
+        res.send ("PROBLEM!!! Found " + accounts.length + ", expected " + NUMBER_OF_ACCOUNTS);
+  }  
+}
+
 function getAccounts (res) {
   var url = "http://microbank-account-system.microbank.svc.cluster.local/accounts";
   client.get(url, function (data, response) {
     console.log ("data:" + data);
+    checkAccountNumber(res, data);
     obtainBalances (res, data);
   });
 }
