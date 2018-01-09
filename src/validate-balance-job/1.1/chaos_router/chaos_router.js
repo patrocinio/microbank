@@ -1,3 +1,5 @@
+ERROR_THRESHOLD = 0.0; // between 0.0 (no error) and 1.0 (100% of error)
+
 function getRandom () {
 	return Math.random();
 }
@@ -9,7 +11,7 @@ function returnError (res) {
 
 function chaos (req, res, next) {
 	r = getRandom();
-	if (r < 0.1) {
+	if (r < ERROR_THRESHOLD) {
 		returnError (res);
 	} else {
 		next ();

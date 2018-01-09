@@ -20,7 +20,7 @@ function checkSum(res){
   if (sum == expected) {
     res.send ("Sum and expected balances match: " + sum);
   } else {
-    res.send ("PROBLEM!!! Sum: " + sum + " expected: " + expected);
+    res.status(400).send ("PROBLEM!!! Sum: " + sum + " expected: " + expected);
   }
 }
 
@@ -41,7 +41,7 @@ function obtainBalance(res, account) {
 
   req.on('error', function (err) {
     console.log('=== obtainBalance request error', err);
-    res.send ("PROBLEM!! Request error");
+    res.status(400).send ("PROBLEM!! Request error");
   });
 }
 
@@ -66,7 +66,7 @@ function checkAccountNumber(res, data) {
   console.log ("Obtainining balance... Number of accounts: " + accounts.length);
 
   if (accounts.length != NUMBER_OF_ACCOUNTS) {
-        res.send ("PROBLEM!!! Found " + accounts.length + ", expected " + NUMBER_OF_ACCOUNTS + " accounts");
+        res.status(400).send ("PROBLEM!!! Found " + accounts.length + ", expected " + NUMBER_OF_ACCOUNTS + " accounts");
   }  
 }
 
@@ -75,7 +75,7 @@ function getAccounts (res) {
   client.get(url, function (data, response) {
     console.log ("data:" + data);
     checkAccountNumber(res, data);
-    obtainBalances (res, data);
+    obtainBalances (res, data); 
   });
 }
 

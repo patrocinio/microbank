@@ -28,7 +28,7 @@ function obtainBalance(res, account) {
 
   console.log ("Obtaining balance for account " + account);
   url = base_url + account;
-  console.log ("URL: " + url);
+  console.log ("URL: " + url); 
 
   var req = client.get(url, function(data, response) {
     parseBalance (res, data);

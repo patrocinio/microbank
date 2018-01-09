@@ -7,7 +7,7 @@ function validateBalance () {
 	console.log ("Calling validate..."); 
    var url = "http://microbank-manager-balance-validator/validate";
    console.log ("Connecting to the following URL " + url);
-   client.get(url, function (data, response) {
+   var req = client.get(url, function (data, response) {
      console.log (data.toString());
      if (response.statusCode == 200) {
      	console.log ("Succeeded");
@@ -17,7 +17,11 @@ function validateBalance () {
       notification.send ("Validation failed: " + data.toString());
      }
    });
+
+   req.on('error', function (err) {
+      console.log('request error', err);
+    }); 
  }
    
  
- validateBalance();   
+ validateBalance();     
