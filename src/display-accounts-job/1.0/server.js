@@ -1,5 +1,5 @@
 var redis = require("redis");
-var client = redis.createClient("redis://microbank-redis");
+var client = redis.createClient("redis://microbank-account-system-redis");
 
 function retrieveAccounts () {
     console.log ("Retrieving accounts");
@@ -10,6 +10,7 @@ function retrieveAccounts () {
         })
     }) 
 }
+
 
 retrieveAccounts();
 

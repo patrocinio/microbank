@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "redis.fullname" . }}
+  name: microbank-account-system-redis
   labels:
     app: {{ template "redis.fullname" . }}
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"

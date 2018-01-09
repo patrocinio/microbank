@@ -9,6 +9,6 @@ spec:
     spec:
       containers:
       - name: validate-balance
-        image: patrocinio/microbank-validate-balance:latest
+        image: patrocinio/microbank-validate-balance-job:latest
         imagePullPolicy: Always
       restartPolicy: Never

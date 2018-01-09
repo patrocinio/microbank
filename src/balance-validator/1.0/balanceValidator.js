@@ -19,7 +19,7 @@ function checkSum(res){
   if (sum == expected) {
     res.send ("Sum and expected balances match: " + sum);
   } else {
-    res.send ("PROBLEM!!! Sum: " + sum + " expected: " + expected);
+    res.status(400).send ("PROBLEM!!! Sum: " + sum + " expected: " + expected);
   }
 }
 

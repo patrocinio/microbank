@@ -8,3 +8,6 @@ kubectl create -f ../jobs/displayAccountsJob.yaml
 
 ./logComponent.sh display-accounts
 
+echo Deleting job
+kubectl delete job display-accounts
+

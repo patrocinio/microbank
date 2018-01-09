@@ -41,6 +41,7 @@ function obtainBalance(res, account) {
 
   req.on('error', function (err) {
     console.log('=== obtainBalance request error', err);
+    res.send ("PROBLEM!! Request error");
   });
 }
 
@@ -65,7 +66,7 @@ function checkAccountNumber(res, data) {
   console.log ("Obtainining balance... Number of accounts: " + accounts.length);
 
   if (accounts.length != NUMBER_OF_ACCOUNTS) {
-        res.send ("PROBLEM!!! Found " + accounts.length + ", expected " + NUMBER_OF_ACCOUNTS);
+        res.send ("PROBLEM!!! Found " + accounts.length + ", expected " + NUMBER_OF_ACCOUNTS + " accounts");
   }  
 }
 
