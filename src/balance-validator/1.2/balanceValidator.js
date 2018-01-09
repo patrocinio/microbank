@@ -9,6 +9,7 @@ var counter;
 var expected;
 
 function parseBalance(res, data) {
+  console.log (data);
   balance = data.balance;
 
   console.log ("Balance: " + balance);
@@ -32,7 +33,7 @@ function obtainBalance(res, account) {
   console.log ("URL: " + url);
 
   var req = client.get(url, function(data, response) {
-    console.log ("Response: " + response.statusCode);
+    console.log ("Response status code: " + response.statusCode);
     if (response.statusCode == 200) {
       parseBalance (res, data);
       counter--;

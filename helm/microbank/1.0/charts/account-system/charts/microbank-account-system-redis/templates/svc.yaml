@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: microbank-account-system-redis
   labels:
-    app: {{ template "redis.fullname" . }}
+    app: microbank-account-system-redis
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
@@ -30,4 +30,4 @@ spec:
     targetPort: metrics
   {{- end }}
   selector:
-    app: {{ template "redis.fullname" . }}
+    app: microbank-account-system-redis  
