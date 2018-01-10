@@ -52,9 +52,14 @@ function registerAccount (res, account) {
 
 function listenToQueue () {
     queue.consumeMessage(function (message) {
-        console.log ("Message: " + message);
-        persistAccount(message);
-        accounts.push(message);
+        account = message.toString();
+        console.log ("Message: " + account);
+        if (hasAccount (account)) {
+            console.log ("Account already found");
+        } else {
+            persistAccount(account);
+            accounts.push(account);
+        }
     }); 
 }
 
