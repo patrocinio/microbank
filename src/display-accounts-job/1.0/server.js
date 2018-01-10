@@ -14,6 +14,7 @@ function retrieveAccounts () {
         replies.forEach(function (reply, i) {
             console.log(reply);
         })
+        client.quit(); 
     }) 
 }
 
