@@ -1,15 +1,21 @@
 function obtainPod() {
-	POD=$(kubectl get po | grep $1 | awk '{print $1}')
-	echo Found $POD
+	PODS=$(kubectl get po | grep $1 | awk '{print $1}')
+	echo Found $PODS
 }
 
 obtainPod $1
-echo Killing Pod $POD
-kubectl delete pod $POD
-
-echo Waiting for Pod to die
-obtainPod $POD
-while [ "$POD" != "" ]
+for p in $PODS 
 do
-	obtainPod $POD
+  echo Killing Pod $p
+  kubectl delete pod $p
+
+  echo Waiting for Pod to die
+  obtainPod $p
+  while [ "$PODS" != "" ]
+  do
+	  obtainPod $p
+  done
+
+
 done
+ 

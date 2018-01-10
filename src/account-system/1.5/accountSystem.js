@@ -51,6 +51,7 @@ function registerAccount (res, account) {
 */
 
 function listenToQueue () {
+    console.log ("Listening to the queue..."); 
     queue.consumeMessage(function (message) {
         account = message.toString();
         console.log ("Message: " + account);
