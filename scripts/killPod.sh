@@ -8,7 +8,10 @@ for p in $PODS
 do
   echo Killing Pod $p
   kubectl delete pod $p
+done
 
+for p in $PODS 
+do
   echo Waiting for Pod to die
   obtainPod $p
   while [ "$PODS" != "" ]
