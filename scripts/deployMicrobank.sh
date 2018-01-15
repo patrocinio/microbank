@@ -1,6 +1,7 @@
 NAME=microbank
 VERSION=$1
 
+clear
 echo Deploying version $1
 
 ./createNamespace.sh microbank
