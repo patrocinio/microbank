@@ -17,7 +17,7 @@ module.exports = {
     console.log ("Sending message " + message);
     Channel(queue, function(err, channel, conn) {  
       if (err) {
-        connsole.error ("Error in estabishing connection to RabbitMQ... Retrying");
+        console.error ("Error in estabishing connection to RabbitMQ... Retrying");
         console.error (err.stack); 
         setTimeout(sendMessage(message), 1e3);
       }
