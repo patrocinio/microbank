@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: reset
+spec:
+  template:
+    metadata:
+      name: resetß
+    spec:
+      containers:
+      - name: reset 
+        image: patrocinio/microbank-reset:latest
+        imagePullPolicy: Always
+      restartPolicy: Never
