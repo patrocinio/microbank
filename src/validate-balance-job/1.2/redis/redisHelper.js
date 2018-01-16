@@ -11,6 +11,11 @@ function connectToRedis (url) {
     return client;
 }
 
+function getRedis () {
+	return redis;
+}
+
 module.exports = {
-	connectToRedis: connectToRedis
+	connectToRedis: connectToRedis,
+	getRedis: getRedis
 }

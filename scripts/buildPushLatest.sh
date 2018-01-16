@@ -1,3 +1,4 @@
+
 for c in ../src/* 
 do
 	latest=$(ls $c | grep 1 | sort -n | tail -1)

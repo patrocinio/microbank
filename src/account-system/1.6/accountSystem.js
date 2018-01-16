@@ -2,21 +2,10 @@ var balance = 100;
 
 var accounts = [];
 
-require('./redis/redisHelper.js');
+var redisHelper = require('./redis/redisHelper');
 var REDIS_URL = "redis://microbank-account-system-redis";
 
 var queue = require('./queue/queue');
-
-function connectToRedis () {
-    console.log ("Connecting to Redis");
-    var client = redis.createClient("redis://microbank-account-system-redis");
-
-    client.on("error", function (err) {
-        console.log("==> Error " + err);
-    });
-
-    return client;
-}
 
 function getAccounts (res) {
     console.log ("accounts: " + accounts);
@@ -33,7 +22,8 @@ function hasAccount (account) {
 
 function persistAccount (account) {
     console.log ("Persisting account " + account);
-    var client = connectToRedis(REDIS_URL);
+    var client = redisHelper.connectToRedis(REDIS_URL);
+    var redis = redisHelper.getRedis();
     client.hset ("accounts", account, "1", redis.print);
 }
 
@@ -53,7 +43,7 @@ function listenToQueue () {
 
 function retrieveAccounts () {
     console.log ("Retrieving accounts");
-    var client = connectToRedis(REDIS_URL);
+    var client = redisHelper.connectToRedis(REDIS_URL);
     client.hkeys("accounts", function (err, replies) {
         console.log ("Found " + replies.length + " accounts");
         replies.forEach(function (reply, i) {

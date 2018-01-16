@@ -21,7 +21,7 @@ function validateBalance (attempts) {
    req.on('error', function (err) {
       console.log('request error', err);
       console.log("Trying again...");
-      if (attemps > 0) {
+      if (attempts > 0) { 
         validateBalance(attempts-1);
       }
     }); 

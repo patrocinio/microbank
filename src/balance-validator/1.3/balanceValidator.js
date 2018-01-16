@@ -78,6 +78,7 @@ function checkAccountNumber(res, data) {
 }
 
 function getAccounts (res) {
+  console.log ("Getting accounts");
   var url = "http://microbank-account-system.microbank.svc.cluster.local/accounts";
   client.get(url, function (data, response) {
     console.log ("Data:");
@@ -95,7 +96,7 @@ function validateBalance (res) {
 module.exports = {
     get: function(req, res) {
         console.log ("Validating balance...")
-        validateBalance(res)
+        validateBalance(res);
         console.log ("Returning result")
     }
 }
