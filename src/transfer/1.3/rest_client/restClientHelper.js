@@ -17,7 +17,7 @@ function get (url, callback) {
     get(url, callback);
   });
 
-   return req;
+
 }
 module.exports = {
 	get : get

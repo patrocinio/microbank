@@ -11,5 +11,5 @@ do
 		sleep 1
 	done
 
-	kubectl logs -f $p &
+	kubectl logs -f $p | tee /tmp/$p &
 done

@@ -1,5 +1,10 @@
 var Channel = require("./channel.js");
 
+/*
+function encode(doc) {  
+  return new Buffer(JSON.stringify(doc));
+}*/
+
 function encode(message) {
   return new Buffer(message);
 }

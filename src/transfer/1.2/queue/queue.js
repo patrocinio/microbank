@@ -1,10 +1,19 @@
 var Channel = require("./channel.js");
 
+var queue = 'microbank';
+
+/*
+function encode(doc) {  
+  return new Buffer(JSON.stringify(doc));
+}*/
+
 function encode(message) {
   return new Buffer(message);
 }
 
-function sendMessage(queue, message) {
+
+module.exports = {
+  sendMessage : function(message) {
     console.log ("Sending message " + message);
     Channel(queue, function(err, channel, conn) {  
       if (err) {
@@ -24,9 +33,9 @@ function sendMessage(queue, message) {
       }
     });
 
-  }
+  },
 
-function consumeMessage(queue, callback) {
+  consumeMessage: function(callback) {
     console.log ("Waiting for a message");
     Channel(queue, function(err, channel, conn) {  
       if (err) {
@@ -60,9 +69,4 @@ function consumeMessage(queue, callback) {
       } // consume
     }); // Channel
   } // consumeMessage
-
-module.exports = {
-  sendMessage : sendMessage,
-
-  consumeMessage: consumeMessage
 }; // exports   

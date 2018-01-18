@@ -1,6 +1,7 @@
 var os = require('os');
 
 var queue = require('./queue/queue');
+const ACCOUNT_QUEUE = "accounts";
 
 var redisHelper = require('./redis/redisHelper');
 var REDIS_URL = "redis://microbank-account-redis";
@@ -8,7 +9,7 @@ var REDIS_URL = "redis://microbank-account-redis";
 const INITIAL_BALANCE = 100;
 var balance;
 
-var name = process.env.NAME;
+var name = obtainAccountName();
 
 
 function getBalance (res) {
@@ -27,8 +28,7 @@ function obtainAccountName () {
 }
 
 function registerAccount() {
-	name = obtainAccountName();
-	queue.sendMessage(name);
+	queue.sendMessage(ACCOUNT_QUEUE, name);
 }
 
 function persistBalance() {
@@ -38,11 +38,9 @@ function persistBalance() {
     client.set (name, balance);
 }
 
-function updateBalance(res, delta) {
+function updateBalance(delta) {
     balance += parseInt(delta);
     persistBalance ();
-
-    getBalance(res); 
 }
 
 function resetBalance() {
@@ -62,7 +60,7 @@ function getInitialBalance() {
             console.log ("Found balance: " + reply.toString());
             balance = parseInt(reply.toString());
         }
-    });
+    }); 
 }
 
 function reset(res) {
@@ -70,8 +68,22 @@ function reset(res) {
     getBalance(res);
 }
 
-registerAccount();
+function listenToQueue () {
+    console.log ("Listening to the queue..."); 
+    queue.consumeMessage(name, function (message) {
+        amount = message.toString();
+        console.log ("Message: " + amount);
+        delta = Number(amount);
+        updateBalance (delta);
+    }); 
+}
+
+
+
 getInitialBalance();
+listenToQueue();
+registerAccount();
+
 
 module.exports = {
     get: function(req, res) {
@@ -79,11 +91,12 @@ module.exports = {
         getBalance(res);
         console.log ("Returning result")
     },
-
+/*
     update: function(req, res) {
         delta = req.params.delta;
         updateBalance(res, delta);
     },
+*/
 
     reset: function(req, res) {
         reset(res);

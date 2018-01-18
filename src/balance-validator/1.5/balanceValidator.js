@@ -12,13 +12,13 @@ function displayData (data) {
   console.log (data);
   if (data.type == "Buffer") {
     console.log ("Found a buffer!");
-    obj = JSON.parse(data.data.toString());
-    console.log (obj);
+    buf = Buffer.from(data.data);
+    console.log (buf.toString());
   }
 
   if (Buffer.isBuffer (data)) {
     console.log ("Found a buffer!!");
-    console.log (Buffer.toString());
+    console.log (data.toString());
   }
 }
 
@@ -53,11 +53,6 @@ function obtainBalance(res, account) {
       if (counter == 0) {
         checkSum (res);
       }
-  });
-
-  req.on('error', function (err) {
-    console.log('=== restClientHelper request error', err);
-    res.status(400).send ("PROBLEM!! Request error");
   });
 
 }
