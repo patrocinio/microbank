@@ -13,7 +13,7 @@ function get (url, callback) {
   });
 
  req.on('error', function (err) {
-    console.log('===> restClientHelper request error', err);
+    console.log('===> restClientHelper request error for ', url);
     get(url, callback);
   });
 

@@ -52,6 +52,8 @@ function obtainBalance(res, account) {
       counter--;
       if (counter == 0) {
         checkSum (res);
+      } else {
+        console.log ("Waiting for another " + counter + " results");
       }
   });
 
@@ -61,26 +63,13 @@ function obtainBalances(res, data) {
   var accounts = data.accounts;
   console.log ("Obtainining balance... Number of accounts: " + accounts.length);
 
-  if (accounts.length == 0) {
-        res.send ("PROBLEM!!! No account found");
-  } else {
     counter = accounts.length;
     sum = 0;
     expected = counter*INITIAL_BALANCE;
     for (var i = 0; i < accounts.length; i++) {
       obtainBalance(res, accounts[i]);
     }
-  }
 }
-
-function checkAccountNumber(res, data) {
-  var accounts = data.accounts;
-  console.log ("Obtainining balance... Number of accounts: " + accounts.length);
-
-  if (accounts.length == 0) {
-        res.status(400).send ("PROBLEM!!! Found no accounts!");
-  }  
-} 
 
 function getAccounts (res) {
   console.log ("Getting accounts");
@@ -88,7 +77,6 @@ function getAccounts (res) {
   var req = client.get(url, function (data, response) {
     console.log ("Response status " + response.statusCode);
     displayData (data);
-    checkAccountNumber(res, data);
     obtainBalances (res, data); 
   });
 
