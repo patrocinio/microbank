@@ -30,7 +30,7 @@ function persistAccount (account) {
 
 function listenToQueue () {
     console.log ("==> Listening to the queue..."); 
-        queue.consumeMessage(ACCOUNT_QUEUE, function (message) {
+    queue.consumeMessage(ACCOUNT_QUEUE, function (message) {
         account = message.toString();
         console.log ("Message: " + account);
         if (hasAccount (account)) {

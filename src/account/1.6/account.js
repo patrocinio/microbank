@@ -24,10 +24,11 @@ function obtainAccountName () {
 	array = hostname.split("-");
 
 	// Normal name: microbank-john-account-...
-	return array[1] + "-" + array[2];
+	return array[0] + "-" + array[1];
 }
 
 function registerAccount() {
+    console.log ("Registering account " + name);
 	queue.sendMessage(ACCOUNT_QUEUE, name);
 }
 

@@ -77,8 +77,8 @@ function checkAccountNumber(res, data) {
   var accounts = data.accounts;
   console.log ("Obtainining balance... Number of accounts: " + accounts.length);
 
-  if (accounts.length != NUMBER_OF_ACCOUNTS) {
-        res.status(400).send ("PROBLEM!!! Found " + accounts.length + ", expected " + NUMBER_OF_ACCOUNTS + " accounts");
+  if (accounts.length == 0) {
+        res.status(400).send ("PROBLEM!!! Found no accounts!");
   }  
 } 
 
