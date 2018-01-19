@@ -63,12 +63,16 @@ function obtainBalances(res, data) {
   var accounts = data.accounts;
   console.log ("Obtainining balance... Number of accounts: " + accounts.length);
 
+  if (accounts.length == 0) {
+    res.send ("No account found");
+  } else {
     counter = accounts.length;
     sum = 0;
     expected = counter*INITIAL_BALANCE;
     for (var i = 0; i < accounts.length; i++) {
       obtainBalance(res, accounts[i]);
     }
+  }
 }
 
 function getAccounts (res) {
