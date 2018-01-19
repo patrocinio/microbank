@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: create-accounts
+spec:
+  template:
+    metadata:
+      name: create-accounts
+    spec:
+      containers:
+      - name: create-accounts
+        image: patrocinio/microbank-create-accounts:latest
+        imagePullPolicy: Always
+      restartPolicy: Never
