@@ -1,5 +1,10 @@
-CONTEXT=mycluster.icp-context
-USER=mycluster.icp-user
+# ICP
+#CONTEXT=mycluster.icp-context
+#USER=mycluster.icp-user
+
+CONTEXT=minikube
+USER=minikube
+
 NAMESPACE=$1
 
 kubectl config set-context $CONTEXT --user=$USER --namespace=$NAMESPACE

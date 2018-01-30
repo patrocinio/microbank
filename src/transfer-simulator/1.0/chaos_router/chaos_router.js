@@ -1,5 +1,5 @@
-ERROR_THRESHOLD = 0.1; // between 0.0 (no error) and 1.0 (100% of error)
-DELAY_THRESOLD = 0.2; // between 0.0 and 1.0, but above ERROR_THRESOLD
+ERROR_THRESHOLD = 0.0; // between 0.0 (no error) and 1.0 (100% of error)
+DELAY_THRESOLD = 0.0; // between 0.0 and 1.0, but above ERROR_THRESOLD
 
 function getRandom () {
 	return Math.random();

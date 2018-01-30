@@ -4,7 +4,7 @@ var client = new Client ();
 function get (url, callback) {
   var req = client.get(url, function(data, response) {
     console.log ("Response status code: " + response.statusCode);
-    if (response.statusCode == 200 || response.statusCode == 400) {
+    if (response.statusCode == 200) {
     	callback (data, response);
     } else {
       console.log ("Trying again...");
@@ -13,11 +13,11 @@ function get (url, callback) {
   });
 
  req.on('error', function (err) {
-    console.log('===> restClientHelper request error', err);
+    console.log('===> restClientHelper request error for ', url);
     get(url, callback);
   });
 
-  return req;
+   return req;
 }
 module.exports = {
 	get : get
