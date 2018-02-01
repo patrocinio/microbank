@@ -8,5 +8,6 @@ spec:
   accessModes:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Recycle
-  hostPath:
+  nfs:
     path: "FILE_PATH/FILE_SYSTEM"
+    server: FILE_SERVER

@@ -1,5 +1,5 @@
-FILE_PATH=/data
-
+FILE_SERVER=fsf-wdc0701a-fz.adn.networklayer.com
+FILE_PATH=/IBM02SV625675_5/data01
 TEMP_FILE=/tmp/volume.yaml
 
 # args: 
@@ -11,7 +11,8 @@ function create_pv () {
 	do
    		echo Creating PV $i
    		kubectl delete pv d-${i}
-		sed s#FILE_PATH#$FILE_PATH#g < volume_config/$1.yaml | \
+		sed s/FILE_SERVER/$FILE_SERVER/g < volume_config/$1.yaml | \
+   		sed s:FILE_PATH:$FILE_PATH:g  | \
    		sed s/FILE_SYSTEM/d-${i}/g > $TEMP_FILE
 
    		cat $TEMP_FILE
