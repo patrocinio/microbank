@@ -1,7 +1,8 @@
 # ICP
-#CONTEXT=mycluster.icp-context
-#USER=mycluster.icp-user
+CONTEXT=mycluster.icp-context
+USER=mycluster.icp-user
 
+# minikube
 CONTEXT=minikube
 USER=minikube
 

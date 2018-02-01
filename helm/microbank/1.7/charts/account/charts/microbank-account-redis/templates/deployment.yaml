@@ -20,17 +20,9 @@ spec:
 {{ toYaml .Values.podAnnotations | indent 8 }}
       {{- end }}
     spec:
-      initContainers:
-      - name: "fix-permissions"
-        image: "busybox"
-        imagePullPolicy: "{{ .Values.imagePullPolicy }}"
-        command: ["sh", "-c", "chown -R 1001:1001 /bitnami"]
-        volumeMounts:
-        - name: redis-data
-          mountPath: /bitnami
-#      securityContext:
-#        runAsUser: 1001
-#        fsGroup: 1001
+      securityContext:
+        runAsUser: 1001
+        fsGroup: 1001
       {{- if .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml .Values.nodeSelector | indent 8 }}
