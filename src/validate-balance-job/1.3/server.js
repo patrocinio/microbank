@@ -8,8 +8,13 @@ function validateBalance () {
    console.log ("Connecting to the following URL " + url);
    var req = client.get(url, function (data, response) {
      console.log (data.toString());
-     console.log ("Succeeded");
-    notification.send ("Validation succeeded");
+     if (response.statusCode == 200) {
+	     console.log ("Succeeded");
+	    notification.send ("Validation succeeded");
+	} else {
+		console.log ("Problem! Problem! Problem!");
+		notification.send (data.toString());
+	}
    });
  }
    

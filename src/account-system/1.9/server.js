@@ -35,7 +35,11 @@ router.get('/', function(req, res) {
 
 router.get('/open/:account', function(req, res) {
 	accountSystem.open(req, res);
-})
+});
+
+router.get('/reset', function(req, res) {
+	accountSystem.reset(req, res);
+});
 
 /*router.get('/register/:account', function(req, res) {
 	accountSystem.register(req, res);

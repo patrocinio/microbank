@@ -8,6 +8,8 @@ var REDIS_URL = "redis://microbank-account-system-redis";
 var queue = require('./queue/queue');
 const ACCOUNT_QUEUE = "accounts";
 
+var client = require('./rest_client/restClientHelper');
+
 function get (req, res) {
     console.log ("Retrieving accounts");
     console.log ("accounts: " + accounts);
@@ -54,9 +56,30 @@ function open(req, res) {
     res.send ("Account open");
 }
 
+function resetAccount (account) {
+  var base_url = "http://microbank-account/reset/";
+
+  url = base_url + account;
+  console.log ("URL: " + url);
+
+  var req = client.get(url, function(data, response) {
+  });
+
+}
+
+function reset(req, res) {
+    accounts.forEach(function (account) {
+        console.log ("Resetting account " + account);
+        resetAccount (account);
+    });
+
+    res.send ("Accounts reset");
+}
+
 retrieveAccounts();
 
 module.exports = {
     get: get,
-    open: open
+    open: open,
+    reset: reset
 }
