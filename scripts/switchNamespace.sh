@@ -1,10 +1,10 @@
 # ICP
 CONTEXT=mycluster.icp-context
-USER=mycluster.icp-user
+USER=admin
 
 # minikube
-CONTEXT=minikube
-USER=minikube
+#CONTEXT=minikube
+#USER=minikube
 
 NAMESPACE=$1
 

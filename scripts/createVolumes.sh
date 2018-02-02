@@ -1,5 +1,5 @@
-FILE_SERVER=fsf-wdc0701a-fz.adn.networklayer.com
-FILE_PATH=/IBM02SV625675_5/data01
+FILE_SERVER=fsf-wdc0401e-fz.service.softlayer.com
+FILE_PATH=/IBM02SV625675_6/data01
 TEMP_FILE=/tmp/volume.yaml
 
 # args: 
