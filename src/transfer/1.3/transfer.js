@@ -1,5 +1,3 @@
-var client = require('./rest_client/restClientHelper');
-
 var queue = require('./queue/queue');
 
 const UPDATE_QUEUE = "update";

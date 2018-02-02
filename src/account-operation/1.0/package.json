@@ -4,6 +4,7 @@
     "dependencies": {
         "express": "*",
         "body-parser": "*",
-        "amqplib": "*"
+        "amqplib": "*",
+        "node-rest-client": "*"
     }
 }
