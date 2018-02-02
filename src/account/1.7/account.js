@@ -2,6 +2,7 @@ var os = require('os');
 
 var queue = require('./queue/queue');
 const ACCOUNT_QUEUE = "accounts";
+const UPDATE_QUEUE = "update";
 
 var redisHelper = require('./redis/redisHelper');
 var REDIS_URL = "redis://microbank-account-redis";
@@ -68,13 +69,17 @@ function open(req, res) {
 }
 
 
-function updateBalance(delta) {
-    balance += parseInt(delta);
-    persistBalance ();
+function updateBalance(account, delta) {
+    getBalance (account, function (balance) {
+        console.log ("Original balance: " + balance);
+        balance += parseInt(delta);
+        console.log ("New balance: " + balance);
+        persistBalance (account, balance);
+    });
 }
 
-function listenToQueue () {
-    console.log ("==> Listening to the queue..."); 
+function listenToAccountQueue () {
+    console.log ("==> Listening to the account queue..."); 
     queue.consumeMessage(ACCOUNT_QUEUE, function (message) {
         account = message.toString();
         console.log ("==> Message: " + account);
@@ -82,10 +87,18 @@ function listenToQueue () {
     }); 
 }
 
+function listenToUpdateQueue () {
+    console.log ("==> Listening to the update queue..."); 
+    queue.consumeMessage(UPDATE_QUEUE, function (message) {
+        account = message.toString();
+        console.log ("==> Message: " + message);
+        obj = JSON.parse(message);
+        updateBalance (obj.account, obj.amount);
+    }); 
+}
 
-
-listenToQueue();
-
+listenToAccountQueue();
+listenToUpdateQueue();
 
 module.exports = {
     get: get,

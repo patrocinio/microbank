@@ -4,7 +4,7 @@ var client = new Client ();
 function get (url, callback) {
   var req = client.get(url, function(data, response) {
     console.log ("Response status code: " + response.statusCode);
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 400) {
     	callback (data, response);
     } else {
       console.log ("Trying again...");

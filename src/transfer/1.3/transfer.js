@@ -2,9 +2,13 @@ var client = require('./rest_client/restClientHelper');
 
 var queue = require('./queue/queue');
 
+const UPDATE_QUEUE = "update";
+
 function updateAccount(res, account, amount) {
+  message = { account : account, amount: amount };
+
   console.log ("Sending " + amount + " to " + account); 
-  queue.sendMessage (account, amount);
+  queue.sendMessage (UPDATE_QUEUE, JSON.stringify(message)); 
 }
 
 function transfer (res, from, to, amount) {

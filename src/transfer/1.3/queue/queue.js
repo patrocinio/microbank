@@ -5,7 +5,7 @@ function encode(message) {
 }
 
 function sendMessage(queue, message) {
-    console.log ("Sending message " + message);
+    console.log ("Sending message " + message + " to queue " + queue);
     Channel(queue, function(err, channel, conn) {  
       if (err) {
         console.error ("Error in estabishing connection to RabbitMQ... Retrying");
