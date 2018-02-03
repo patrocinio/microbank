@@ -4,10 +4,10 @@ var client = new Client ();
 function get (url, callback) {
   var req = client.get(url, function(data, response) {
     console.log ("Response status code: " + response.statusCode);
-    if (response.statusCode == 200 || response.statusCode == 400) {
+    if (response.statusCode == 200 || response.statusCode == 400 || response.statusCode == 404) {
       callback (data, response);
     } else {
-      console.log ("Trying again in 1 sec...");
+      console.log ("Trying again in 1 sec... URL: " + url);
       setTimeout(get, 1e3, url, callback);
     }
   });

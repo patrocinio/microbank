@@ -10,7 +10,7 @@ function sendMessage(queue, message) {
       if (err) {
         console.error ("Error in estabishing connection to RabbitMQ... Retrying");
         console.error (err.stack); 
-        setTimeout(sendMessage(message), 1e3);
+        setTimeout(sendMessage, 1e3, queue, message);
       }
       else {
         console.log('channel and queue created');
