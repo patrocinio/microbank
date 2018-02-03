@@ -5,12 +5,12 @@ function encode(message) {
 }
 
 function sendMessage(queue, message) {
-    console.log ("Sending message " + message);
+    console.log ("Sending message " + message + " to queue " + queue);
     Channel(queue, function(err, channel, conn) {  
       if (err) {
         console.error ("Error in estabishing connection to RabbitMQ... Retrying");
         console.error (err.stack); 
-        setTimeout(sendMessage(message), 1e3);
+        setTimeout(sendMessage, 1e3, queue, message);
       }
       else {
         console.log('channel and queue created');
@@ -30,7 +30,9 @@ function consumeMessage(queue, callback) {
     console.log ("Waiting for a message");
     Channel(queue, function(err, channel, conn) {  
       if (err) {
-        console.error(err.stack);
+        console.error ("Error in estabishing connection to RabbitMQ... Retrying");
+        console.error (err.stack); 
+        setTimeout(consumeMessage, 1e3, queue, callback);
       }
       else {
         console.log('channel and queue created');
@@ -63,6 +65,5 @@ function consumeMessage(queue, callback) {
 
 module.exports = {
   sendMessage : sendMessage,
-
   consumeMessage: consumeMessage
 }; // exports   
