@@ -1,5 +1,3 @@
-PORT=30021
-FROM=$1
-TO=$2
+PORT=30955
 
-curl -d "from=$1-account&to=$2-account&amount=10" -X POST http://50.22.210.194:$PORT/transfer
+curl -d "from=account-1&to=account-0&amount=10" -X POST http://169.63.84.216:$PORT/transfer

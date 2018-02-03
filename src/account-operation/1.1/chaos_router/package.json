@@ -1,0 +1,5 @@
+{
+    "name": "patrocinio_chaos_router",
+    "main": "chaos_router.js",
+    "version": "0.2.0"
+}
