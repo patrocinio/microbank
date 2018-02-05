@@ -48,6 +48,11 @@ router.get('/', function(req, res) {
 	res.send("I'm healthy")
 });
 
+router.get('/getLock/:account', function (req, res) {
+	account.getLock(req, res);
+});
+
+
 
 // more routes for our API will happen here
 
