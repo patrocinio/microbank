@@ -3,8 +3,8 @@
 # Declare variables to be passed into your templates.
 replicaCount: 1
 image:
-#  repository: patrocinio/microbank-queue-mgr
-  repository: localhost:5000/microbank-queue-mgr
+  repository: patrocinio/microbank-queue-mgr
+#  repository: localhost:5000/microbank-queue-mgr
   tag: latest
   pullPolicy: Always
 service:

@@ -3,8 +3,8 @@
 # Declare variables to be passed into your templates.
 replicaCount: 1
 image:
-#  repository: patrocinio/microbank-account-operation
-  repository: localhost:5000/microbank-account-operation
+  repository: patrocinio/microbank-account-operation
+#  repository: localhost:5000/microbank-account-operation
   tag: latest
   pullPolicy: Always
 service:
