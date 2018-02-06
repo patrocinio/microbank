@@ -47,7 +47,6 @@ function consumeMessage(queue, callback) {
             console.warn(err.message);
           }
           else if (msg) {
-            console.log('consuming %j', msg.content.toString());
             callback(msg.content);
             setTimeout(function() {
               channel.ack(msg);

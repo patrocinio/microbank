@@ -42,10 +42,10 @@ function getLock(account, callback) {
     client.get (getLockKey (account), function (err, reply) {
         if (reply == null) {
             console.log ("==> Lock not found for account " + account);
-            lock = false;
+            lock = 0;
         } else {
             console.log ("Found lock: " + reply.toString());
-            lock = reply == "true";
+            lock = reply;
         }
         callback (lock);
     }); 

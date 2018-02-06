@@ -19,9 +19,9 @@ function transfer (res, from, to, amount) {
   logger.logMessage ("Transfering from account " + from + " to " + to + 
     " amount " + amount);
 
-  updateAccount (res, from, amount.toString());
   var withdrawal = -amount;
-  updateAccount (res, to, withdrawal.toString());
+  updateAccount (res, from, withdrawal.toString());
+  updateAccount (res, to, amount.toString());
   res.send("Done!");
 }
 

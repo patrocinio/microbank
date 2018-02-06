@@ -1,6 +1,6 @@
 const AMQP = require('amqplib/callback_api');
 
-const URL = 'amqp://guest:guest@microbank-rabbitmq:5672';
+const URL = 'amqp://guest:guest@microbank-rabbitmq.microbank.svc.cluster.local:5672';
 
 module.exports = createQueueChannel;
 

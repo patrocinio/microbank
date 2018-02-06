@@ -30,6 +30,7 @@ function parseBalance(res, data) {
 
   console.log ("Balance: " + balance);
   sum = sum + balance;
+  return balance;
 }
 
 function checkSum(res){
@@ -52,7 +53,8 @@ function obtainBalance(res, account) {
 
   var req = client.get(url, function(data, response) {
       console.log ("Account: " + account);
-      parseBalance (res, data);
+      balance = parseBalance (res, data);
+      logger.logMessage ("Account " + account + " balance " + balance);
       counter--;
       if (counter == 0) {
         checkSum (res);
