@@ -1,6 +1,6 @@
 var client = require('./rest_client/restClientHelper');
 
-const MAX_ACCOUNTS = 5;
+const MAX_ACCOUNTS = 2;
 
 function createAccounts () {
    var base_url = "http://microbank-account-system/open/";
