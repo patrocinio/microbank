@@ -10,7 +10,7 @@ var logger = require('./logger/logger');
 
 function ackMessage (message) {
   console.log ("Ack'ing message");
-  logger.logMessage ("Ack'ing message " + message.content);
+  logger.logMessage ("Ack'ing message " + message);
   queue.sendMessage (UPDATE_ACK_QUEUE, message);
 }
 
@@ -33,7 +33,7 @@ function updateBalance(channel, message, account, delta) {
   client.post(url, args, function (data, response) {
      if (response.statusCode == 200) {
       console.log ("Succeeded");
-      ackMessage (message);
+      ackMessage (message.content);
       queue.ack (channel, message);
      } else {
       console.log ("PROBLEM!!");
@@ -49,7 +49,8 @@ function updateBalance(channel, message, account, delta) {
 function lockAccount(channel, message, attempts) {
   var base_url = "http://microbank-account/lock/";
 
-  obj = JSON.parse(message.content);
+  console.log ("==> Message content " + message.content);
+  var obj = JSON.parse(message.content);
   console.log ("Locking account " + obj.account + " attempt #" + attempts);
   logger.logMessage ("Locking account  " + obj.account + " attempt #" + attempts);
 

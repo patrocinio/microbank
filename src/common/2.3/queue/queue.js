@@ -51,10 +51,8 @@ function consumeMessage(queue, callback) {
             console.warn(err.message);
           }
           else if (msg) {
-//            callback(msg.content);
             callback(channel, msg);
             setTimeout(function() {
-//              channel.ack(msg);
               consume();
             }, 1e3);
           }

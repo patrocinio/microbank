@@ -1,5 +1,6 @@
 var queue = require('./queue/queue');
 const UPDATE_QUEUE = "update";
+const UPDATE_ACK_QUEUE = "update_ack";
 
 var logger = require('./logger/logger');
 
@@ -7,8 +8,12 @@ var redisHelper = require('./redis/redisHelper');
 var REDIS_URL = "redis://microbank-transfer-redis";
 var TRANSACTION_KEY = "transaction_id";
 
-function updateAccount(res, account, amount) {
-  message = { account : account, amount: amount };
+function updateAccount(res, account, amount, transactionId) {
+  message = { 
+    transfer: transfer,
+    account: account, 
+    amount: amount
+  };
 
   console.log ("Sending " + amount + " to " + account); 
   logger.logMessage ("Sending " + amount + " to " + account); 
@@ -39,6 +44,14 @@ function getTransactionId (req, res, callback) {
 
 }
 
+// Persist 2 to indicate we're waiting for 2 acks
+function createTransactionAckCounter (transactionId) {
+    console.log ("Persisting AckCounter for transaction " + transactionId);
+    logger.logMessage ("Persisting AckCounter for transaction " + transactionId);
+    var client = redisHelper.connectToRedis(REDIS_URL); 
+    client.set (transactionId, 2);
+}
+
 function doTransfer (req, res, transactionId) {
 
   var from = req.body.from;
@@ -50,9 +63,11 @@ function doTransfer (req, res, transactionId) {
   logger.logMessage ("Transfering from account " + from + " to " + to + 
     " amount " + amount +  " transaction_id " + transactionId);
 
+  createTransactionAckCounter(transactionId);
+
   var withdrawal = -amount;
-  updateAccount (res, from, withdrawal.toString());
-  updateAccount (res, to, amount.toString());
+  updateAccount (res, from, withdrawal.toString(), transactionId);
+  updateAccount (res, to, amount.toString(), transactionId);
   res.send("Done!");
 }
 
@@ -60,6 +75,22 @@ function transfer (req, res) {
   getTransactionId (req, res, doTransfer);
 }
 
+function reconcileAck (message) {
+  console.log ("content: " + message.content.toString());
+  var obj = JSON.parse (message.content.toString ());
+}
+
+function listenToAckQueue () {
+    console.log ("==> Listening to the ack queue..."); 
+    queue.consumeMessage(UPDATE_ACK_QUEUE, function (channel, message) {
+        account = message.toString();
+        console.log ("==> Received message at ack queue");
+        reconcileAck (message);
+        queue.ack (channel, message);
+    }); 
+}
+
+listenToAckQueue();
 
 module.exports = {
     transfer: transfer

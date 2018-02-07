@@ -14,21 +14,17 @@ function createQueueChannel(queue, cb) {
       cb(err);
     } 
     else {
-      console.log('connected');
       conn.createChannel(onceChannelCreated);
     }
     function onceChannelCreated(err, channel) {
-      console.log ("onceChannelCreated");
       if (err) {
         cb(err);
       }
       else {
-        console.log('channel created');
         channel.assertQueue(queue, {durable: true}, onceQueueCreated);
       }
 
       function onceQueueCreated(err) {
-        console.log ("onceQueueCreated");
         if (err) {
           cb(err);
         }
