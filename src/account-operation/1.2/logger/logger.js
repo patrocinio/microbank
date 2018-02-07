@@ -5,7 +5,7 @@ const LOGGING_QUEUE = "log";
 
 function logMessage(message) {
   console.log ("Logging " + message + " hostname " + os.hostname()); 
-  args = {
+  var args = {
   	hostname: os.hostname(),
   	message: message
   }

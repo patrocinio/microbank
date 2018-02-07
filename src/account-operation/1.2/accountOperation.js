@@ -30,7 +30,7 @@ function updateBalance(account, delta) {
 
   logger.logMessage ("Updating account " + account + " with amount " + delta);
 
-  args = {
+  var args = {
     data: 
     { 
       account: account,
