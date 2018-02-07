@@ -22,7 +22,7 @@ function get (url, callback) {
 
 function post (url, args, callback) {
   var req = client.post(url, args, function(data, response) {
-    console.log ("Rest Clinet Post response status code: " + response.statusCode);
+    console.log ("Rest Client post response status code: " + response.statusCode);
     if (response.statusCode == 200 || response.statusCode == 400) {
       callback (data, response);
     } else {

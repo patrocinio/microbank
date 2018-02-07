@@ -26,6 +26,10 @@ function sendMessage(queue, message) {
 
   }
 
+function ack(channel, message) {
+  channel.ack (message);
+}
+
 function consumeMessage(queue, callback) {
     console.log ("Waiting for a message");
     Channel(queue, function(err, channel, conn) {  
@@ -47,9 +51,11 @@ function consumeMessage(queue, callback) {
             console.warn(err.message);
           }
           else if (msg) {
-            callback(msg.content);
+//            callback(msg.content);
+            console.log ("queue msg:" + msg);
+            callback(channel, msg);
             setTimeout(function() {
-              channel.ack(msg);
+//              channel.ack(msg);
               consume();
             }, 1e3);
           }
@@ -64,5 +70,6 @@ function consumeMessage(queue, callback) {
 
 module.exports = {
   sendMessage : sendMessage,
-  consumeMessage: consumeMessage
+  consumeMessage: consumeMessage,
+  ack: ack
 }; // exports   

@@ -126,10 +126,14 @@ function updateBalance(res, account, delta) {
 
 function listenToAccountQueue () {
     console.log ("==> Listening to the account queue..."); 
-    queue.consumeMessage(ACCOUNT_QUEUE, function (message) {
-        account = message.toString();
-        console.log ("==> Message: " + account);
+    queue.consumeMessage(ACCOUNT_QUEUE, function (channel, message) {
+        console.log ("channel: " + channel);
+        console.log ("message:" + message);
+        
+        account = message.content.toString();
+        console.log ("==> Account: " + account);
         resetBalance (account);
+        queue.ack (channel, message);
     }); 
 }
 

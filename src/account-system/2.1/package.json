@@ -1,0 +1,11 @@
+{
+    "name": "node-api",
+    "main": "server.js",
+    "dependencies": {
+        "express": "*",
+        "body-parser": "*",
+        "redis": "*",
+        "amqplib": "*",
+        "node-rest-client": "*"
+    }
+}
