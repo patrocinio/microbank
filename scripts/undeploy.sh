@@ -7,3 +7,7 @@ helm delete --purge microbank
 echo Deleting microbank-manager
 helm delete --purge microbank-manager
 
+./switchNamespace.sh microbank-simulator
+echo Deleting microbank-simulator
+helm delete --purge microbank-simulator
+
