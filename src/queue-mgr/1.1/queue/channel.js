@@ -33,5 +33,6 @@ function createQueueChannel(queue, cb) {
         }
       } // onceQueueCreated
     } // onceChannelCreated
+  })
   } // onceConnected
 } // createQueueChannel

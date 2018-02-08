@@ -7,11 +7,11 @@ const EXPIRE_QUEUE = "expire";
 
 var client = require('./rest_client/restClientHelper');
 
-var logger = require('./logger/logger'); 
+//var logger = require('./logger/logger'); 
 
 function ackMessage (message) {
   console.log ("Ack'ing message");
-  logger.logMessage ("Ack'ing message " + message);
+//  logger.logMessage ("Ack'ing message " + message);
   queue.sendMessage (UPDATE_ACK_QUEUE, message);
   queue.sendMessage (EXPIRE_QUEUE, message);
 }
@@ -21,7 +21,7 @@ function updateBalance(channel, message, account, delta) {
 
   console.log ("==> URL: " + url);
 
-  logger.logMessage ("Updating account " + account + " with amount " + delta);
+//  logger.logMessage ("Updating account " + account + " with amount " + delta);
 
   var args = {
     data: 
@@ -54,7 +54,7 @@ function lockAccount(channel, message, attempts) {
   console.log ("==> Message content " + message.content);
   var obj = JSON.parse(message.content);
   console.log ("Locking account " + obj.account + " attempt #" + attempts);
-  logger.logMessage ("Locking account  " + obj.account + " attempt #" + attempts);
+//  logger.logMessage ("Locking account  " + obj.account + " attempt #" + attempts);
 
 
   var url = base_url + obj.account;

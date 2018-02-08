@@ -25,3 +25,4 @@ function resetTransferCounter () {
    
 resetAccounts();  
 resetQueue ();
+resetTransferCounter();
