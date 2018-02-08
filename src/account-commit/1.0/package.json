@@ -5,6 +5,7 @@
         "express": "*",
         "body-parser": "*",
         "amqplib": "*",
-        "node-rest-client": "*"
+        "node-rest-client": "*",
+        "pg": "*" 
     }
 }

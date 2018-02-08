@@ -6,6 +6,6 @@
         "body-parser": "*",
         "amqplib": "*",
         "node-rest-client": "*",
-        "cors": "*"
+        "mysql": "*"
     }
 }

@@ -7,9 +7,8 @@
 var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
-var bff        = require('./dashboardBFF');
+var account    = require('./accountOperation');
 var chaos      = require('./chaos_router/chaos_router.js');
-var cors       = require('cors');
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -23,28 +22,10 @@ var port = process.env.PORT || 80;        // set our port
 var router = express.Router();              // get an instance of the express Router
 
 app.use (chaos);
-app.use(cors());
 
 router.get('/', function(req, res) {
-	res.send("I'm healthy... " +
-		" You can call getOverallBalance, getTransactionCount, getTransactionHistory, getPods ");
-});
-
-router.get('/getOverallBalance', function(req, res) {
-	return bff.getOverallBalance (req, res);
-});
-
-router.get('/getTransactionCount', function(req, res) {
-	return bff.getTransactionCount (req, res);
-});
-
-router.get('/getTransactionHistory', function (req, res) {
-	return bff.getTransactionHistory (req, res);
-});
-
-router.get('/getPods', function (req, res) {
-	return bff.getPods (req, res);
-});
+	res.send("I'm healthy")
+})
 
 // more routes for our API will happen here
 
