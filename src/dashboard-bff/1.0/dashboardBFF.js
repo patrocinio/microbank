@@ -31,10 +31,16 @@ function getOverallBalance (req, res) {
 }
 
 function getTransactionCount (req, res) {
-    result = { "transactionCount" : 123 };
+    var url = "http://microbank-transfer.microbank.svc.cluster.local/getTransactionCount";
+    
+  console.log ("Connecting to URL " + url);
+  client.get (url, function (data, response) {
+    console.log ("Status " + response.statusCode);
 
-    res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(result));
+    console.log ("Returning " + data);
+    displayData (data);
+    res.send (data);
+  });
 
 }
 
