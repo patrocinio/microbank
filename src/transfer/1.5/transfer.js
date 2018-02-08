@@ -9,8 +9,8 @@ var REDIS_URL = "redis://microbank-transfer-redis";
 var TRANSACTION_KEY = "transaction_id";
 
 function updateAccount(res, account, amount, transactionId) {
-  message = { 
-    transfer: transfer,
+  var message = { 
+    transactionId: transactionId,
     account: account, 
     amount: amount
   };
@@ -50,6 +50,7 @@ function createTransactionAckCounter (transactionId) {
     logger.logMessage ("Persisting AckCounter for transaction " + transactionId);
     var client = redisHelper.connectToRedis(REDIS_URL); 
     client.set (transactionId, 2);
+    client.quit ();
 }
 
 function doTransfer (req, res, transactionId) {
@@ -75,9 +76,31 @@ function transfer (req, res) {
   getTransactionId (req, res, doTransfer);
 }
 
+function commit () {
+  console.log ("Committing transaction");
+}
+
+function deductAckCounter (transactionId) {
+    console.log ("Deducting ackCounter for transaction " + transactionId);
+    var client = redisHelper.connectToRedis(REDIS_URL);
+    client.get (transactionId, function (err, reply) {
+      var counter = reply-1;
+      console.log ("Setting counter to " + counter);
+      client.set (transactionId, counter);
+      client.quit ();
+
+      if (counter == 0) {
+        commit();
+      }
+    }); 
+
+}
+
 function reconcileAck (message) {
   console.log ("content: " + message.content.toString());
   var obj = JSON.parse (message.content.toString ());
+  console.log ("transactionId: " + obj.transactionId);
+  deductAckCounter (obj.transactionId);
 }
 
 function listenToAckQueue () {
