@@ -1,8 +1,33 @@
-function getOverallBalance (req, res) {
-    result = { "balance" : 500 };
+var client = require('./rest_client/restClientHelper');
 
-    res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(result));
+
+function displayData (data) {
+  console.log ("Data:");
+  console.log (data);
+  if (data.type == "Buffer") {
+    console.log ("Found a buffer!");
+    buf = Buffer.from(data.data);
+    console.log (buf.toString());
+  }
+
+  if (Buffer.isBuffer (data)) {
+    console.log ("Found a buffer!!");
+    console.log (data.toString());
+  }
+}
+
+function getOverallBalance (req, res) {
+  var url = "http://microbank-manager-balance-validator/getBalance";
+
+  console.log ("Connecting to URL " + url);
+  client.get (url, function (data, response) {
+    console.log ("Status " + response.statusCode);
+
+    console.log ("Returning " + data);
+    displayData (data);
+    res.send (data);
+  });
+
 }
 
 function getTransactionCount (req, res) {
