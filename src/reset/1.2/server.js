@@ -14,6 +14,14 @@ function resetQueue () {
   });
 
 }
+
+function resetTransferCounter () {
+  console.log ("Resetting transfer counter");
+  var url = "http://microbank-transfer/reset";
+  var req = client.get(url, function (data, response) {
+  });
+
+}
    
 resetAccounts();  
 resetQueue ();

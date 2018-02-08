@@ -7,7 +7,7 @@
 var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
-var transfer   = require('./transfer');
+var queue      = require('./queueMgr');
 var chaos      = require('./chaos_router/chaos_router.js');
 
 // configure app to use bodyParser()
@@ -25,17 +25,15 @@ var router = express.Router();              // get an instance of the express Ro
 app.use (chaos);
 
 // test route to make sure everything is working (accessed at GET http://localhost:80/api)
-router.post('/transfer', function(req, res) {
-	transfer.transfer(req, res);
-});
-
-router.get('/getTransactionCount', function(req, res) {
-	transfer.getTransactionCount(req, res);
+router.get('/check', function(req, res) {
+	queue.check(req, res);
 });
 
 router.get('/reset', function(req, res) {
-	transfer.reset(req, res);
+	queue.reset(req, res);
 });
+
+
 
 router.get('/', function(req, res) {
 	console.log ("Returning healthy")

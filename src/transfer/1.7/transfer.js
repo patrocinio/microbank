@@ -74,16 +74,19 @@ function getTransactionCount (req, res) {
   })
 }
 
+function persistCount (count) {
+  var client = redisHelper.connectToRedis(REDIS_URL);
+  client.set (TRANSACTION_COUNT, count);
+  client.quit();
+}
+
 function updateTransactionCount () {
   console.log ("Updating transaction count");
   getTransactionCountCallback (function (count) {
-    var client = redisHelper.connectToRedis(REDIS_URL);
     count += 1;
-    client.set (TRANSACTION_COUNT, count);
-    client.quit();
+    persistCount (count);
   }); 
 }
-
 
 
 // Persist 2 to indicate we're waiting for 2 acks
@@ -156,9 +159,16 @@ function listenToAckQueue () {
     }); 
 }
 
+function reset (req, res) {
+  console.log ("Resetting counter");
+  persistCount (0);
+  res.send ("Account reset");
+}
+
 listenToAckQueue();
 
 module.exports = {
     transfer: transfer,
-    getTransactionCount : getTransactionCount
+    getTransactionCount : getTransactionCount,
+    reset: reset
 }
