@@ -75,6 +75,7 @@ function getTransactionCount (req, res) {
 }
 
 function persistCount (count) {
+  console.log ("Persisting counter " + count);
   var client = redisHelper.connectToRedis(REDIS_URL);
   client.set (TRANSACTION_COUNT, count);
   client.quit();
