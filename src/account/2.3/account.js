@@ -166,9 +166,10 @@ function lock(req, res) {
             if (currentTime > expiration) {
                 console.log ("===> Canceling old lock");
                 persistLock (account, new Date().getTime());
+                res.send ("Account " + account + " locked");
+            } else {
+                res.status(400).send ("Account " + account + " already locked timestamp: " + timestamp);
             }
-
-            res.status(400).send ("Account " + account + " already locked timestamp: " + timestamp);
         } else {
             persistLock (account, new Date().getTime());
             res.send ("Account " + account + " locked");
