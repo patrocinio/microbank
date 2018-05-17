@@ -1,4 +1,4 @@
 NAME=chaos-monkey
 
 ./switchNamespace.sh default
-helm delete --purge $NAME
+helm delete --purge $NAME --tls
