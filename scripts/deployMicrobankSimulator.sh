@@ -5,4 +5,4 @@ echo Deploying version $VERSION
 
 ./createNamespace.sh microbank-simulator
 helm delete --purge $NAME --tls
-helm install -n $NAME ../helm/microbank-simulator/$VERSION --tls
+helm install -n $NAME ../helm/microbank-simulator/$VERSION --t
