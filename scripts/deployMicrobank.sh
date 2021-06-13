@@ -10,5 +10,5 @@ clear
 echo Deploying version $VERSION
 
 ./createNamespace.sh microbank
-helm delete --purge $NAME $HELM_OPTIONS
-helm install -n $NAME ../helm/microbank/$VERSION $HELM_OPTIONS
+helm delete $NAME $HELM_OPTIONS
+helm install $NAME ../helm/microbank/$VERSION $HELM_OPTIONS -v 5
