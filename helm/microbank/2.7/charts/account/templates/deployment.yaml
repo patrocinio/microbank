@@ -8,8 +8,7 @@ spec:
 
   selector:
     matchLabels:
-      app: account
-
+        app: {{ template "fullname" . }}
 
   replicas: {{ .Values.replicaCount }}
   template:

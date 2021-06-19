@@ -8,7 +8,7 @@ spec:
 
   selector:
     matchLabels:
-      app: account-system
+      app: {{ template "fullname" . }}
 
   replicas: {{ .Values.replicaCount }}
   template:
@@ -18,8 +18,6 @@ spec:
     spec:
       containers:
       - name: {{ .Chart.Name }}
-        labels:
-          app: account-system
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
