@@ -5,9 +5,11 @@ metadata:
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
 spec:
+
   selector:
     matchLabels:
-      app: queue-manager
+      app: {{ template "fullname" . }}
+
 
   replicas: {{ .Values.replicaCount }}
   template:

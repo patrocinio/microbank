@@ -7,7 +7,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: transfer
+        app: {{ template "fullname" . }}
 
   replicas: {{ .Values.replicaCount }}
   template:

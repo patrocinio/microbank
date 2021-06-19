@@ -5,11 +5,9 @@ metadata:
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
 spec:
-
   selector:
     matchLabels:
-      app: microbank-account-system-redis
-
+        app: {{ template "fullname" . }}
 
   replicas: {{ .Values.replicaCount }}
   template:
@@ -33,4 +31,3 @@ spec:
             port: {{ .Values.service.internalPort }}
         resources:
 {{ toYaml .Values.resources | indent 10 }}
-

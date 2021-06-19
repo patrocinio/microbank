@@ -10,7 +10,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: rabbitmq
+      app: {{ template "rabbitmq.fullname" . }}
 
   template:
     metadata:
