@@ -5,7 +5,7 @@ How to run
 
 ```
 cd scripts
-deployMicrobank.sh
+deployMicrobank
 deployMicrobankManager.sh 1.6
 createAccounts.sh
 validateBalance.sh

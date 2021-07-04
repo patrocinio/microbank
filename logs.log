@@ -1,0 +1,5 @@
+Log file created at: 2021/06/23 19:25:39
+Running on machine: patro-idea
+Binary: Built with gc go1.16.4 for darwin/amd64
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I0623 19:25:39.506592   68484 proxy.go:68] proxy command started
