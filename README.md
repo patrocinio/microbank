@@ -13,7 +13,7 @@ cd scripts
 deployMicrobankManager.sh
 createAccounts.sh
 validateBalance.sh
-deployMicrobankSimulator.sh 1.0
+deployMicrobankSimulator.sh
 switchNamespace.sh microbank-simulator
 logComponent.sh transfer
 deployChaosMonkey.sh
