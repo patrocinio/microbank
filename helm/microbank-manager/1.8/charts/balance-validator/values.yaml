@@ -4,7 +4,7 @@
 replicaCount: 1
 image:
   repository: patrocinio/microbank-balance-validator
-  tag: 1.8
+  tag: latest
   pullPolicy: Always
 service:
   name: balance-validator
