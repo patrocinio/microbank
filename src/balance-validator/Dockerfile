@@ -1,4 +1,4 @@
-FROM node:7.6
+FROM node:latest
 ARG version
 EXPOSE 80
 
