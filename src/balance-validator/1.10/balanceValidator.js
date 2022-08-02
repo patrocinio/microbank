@@ -41,7 +41,7 @@ function checkSum(res){
     res.send (message);
   } else {
     message = new Date().toString() + "PROBLEM!!! Sum: " + sum + " expected: " + expected;
-    logger.logMessage(mesage);
+    logger.logMessage(message);
     res.status(400).send (message);
   }
 }
