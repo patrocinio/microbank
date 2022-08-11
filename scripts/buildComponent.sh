@@ -6,5 +6,5 @@ cd ../src/$COMPONENT
 cp -rf ../common/latest/* $VERSION/ 
 
 IMAGE=patrocinio/microbank-$COMPONENT:$VERSION
-docker build --build-arg version=$VERSION -t $IMAGE .
+docker build --build-arg version=$VERSION -t $IMAGE --platform=linux/amd64 .
 
