@@ -25,8 +25,10 @@ function getBalance(account, callback) {
 
     connection.query("SELECT BALANCE FROM ACCOUNT WHERE ACCOUNT_NUMBER = " + account, 
     function(error, results, fields) {
-
-        if (results == null) {
+        if (error) {
+            throw error;
+        }
+        if (!results.length) {
             console.log ("==> Balance not found for account " + account);
             balance = -4545;
         } else {
@@ -182,7 +184,7 @@ function createAccountTable() {
     stmt = "CREATE TABLE ACCOUNT (ACCOUNT_NUMBER INTEGER PRIMARY KEY, BALANCE INTEGER)"
     connection.query(stmt, function (error, result) {
         if (error) {
-            throw error;
+            console.log ("Error: ", error);
         }
         console.log ("Table created");
     })
