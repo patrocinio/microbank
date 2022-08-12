@@ -12,6 +12,7 @@ function connect () {
 
   connection.connect();
   console.log ("Connected to DB");
+  return connection;
 }
 
 module.exports = {

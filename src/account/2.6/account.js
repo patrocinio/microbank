@@ -5,6 +5,8 @@ const ACCOUNT_QUEUE = "accounts";
 const UPDATE_QUEUE = "update";
 
 var mysql = require('./mysql/mysql')
+var connection = mysql.connect();
+
 
 var logger = require('./logger/logger');
 
@@ -21,17 +23,17 @@ function getLockKey (account) {
 function getBalance(account, callback) {
     console.log ("Getting balance for account " + account);
 
-    var client = redisHelper.connectToRedis(REDIS_URL);
-    client.get (getBalanceKey (account), function (err, reply) {
-        if (reply == null) {
+    connection.query("SELECT BALANCE FROM ACCOUNT WHERE ACCOUNT_NUMBER = " + account, 
+    function(error, results, fields) {
+
+        if (results == null) {
             console.log ("==> Balance not found for account " + account);
             balance = -4545;
         } else {
-            console.log ("Found balance: " + reply.toString());
-            balance = parseInt(reply.toString());
+            console.log ("Found results: " + results.toString());
+            balance = parseInt(results.toString());
         }
         callback (balance);
-        client.quit();
     }); 
 }
 
@@ -176,8 +178,18 @@ function lock(req, res) {
     })
 }
 
+function createAccountTable() {
+    stmt = "CREATE TABLE ACCOUNT (ACCOUNT_NUMBER INTEGER PRIMARY KEY, BALANCE INTEGER)"
+    connection.query(stmt, function (error, result) {
+        if (error) {
+            throw error;
+        }
+        console.log ("Table created");
+    })
+}
+
 listenToAccountQueue();
-mysql.connect();
+createAccountTable();
 
 module.exports = {
     get: get,
