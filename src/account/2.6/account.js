@@ -79,14 +79,22 @@ function get (req, res) {
     });
 }
 
-function persistBalance(account, balance) {  
+function persistBalance(res, account, balance) {  
     console.log ("Persisting balance of account " + account + " balance: " + balance);
 
-    var client = redisHelper.connectToRedis(REDIS_URL); 
-    client.set (getBalanceKey (account), balance);
+    connection.query("UPDATE ACCOUNT SET BALANCE = " + balance + 
+        " WHERE ACCOUNT_NUMBER = "  + account, 
+    function(error, results, fields) {
+        if (error) {
+            throw error;
+        } else {
+            logger.logMessage ("==> Account " + account + " updated with balance " + balance);
+            console.log ("Account updated");
+            buildResult (res, balance);
 
-    logger.logMessage ("==> Account " + account + " updated with balance " + balance);
-    client.quit();
+        }
+    });
+
 }
 
 function persistLock (account, timestamp) {
@@ -103,10 +111,10 @@ function unlock(account) {
     persistLock (account, 0);
 }
 
-function resetBalance(account) {
+function resetBalance(res, account) {
     balance = INITIAL_BALANCE;
     console.log ("Setting initial balance of account " + account + " to: " + balance);
-    persistBalance(account, balance);
+    persistBalance(res, account, balance);
     return balance;
 }
 
@@ -114,9 +122,7 @@ function reset(req, res) {
     console.log ("Params: ");
     console.log (req.params);
     account = req.params.account;
-    balance = resetBalance(account);
-    unlock(account);
-    buildResult (res, balance);
+    balance = resetBalance(res, account);
 }
 
 function open(req, res) {
@@ -125,7 +131,8 @@ function open(req, res) {
     account = req.params.account;
 
 
-    connection.query("INSERT INTO ACCOUNT (ACCOUNT_NUMBER, BALANCE) VALUES (" + account + ", 0)", 
+    connection.query("INSERT INTO ACCOUNT (ACCOUNT_NUMBER, BALANCE) VALUES (" + account + 
+        ", " + INITIAL_BALANCE + ")", 
     function(error, results, fields) {
         if (error) {
             throw error;
