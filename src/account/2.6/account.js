@@ -43,25 +43,6 @@ function getBalance(account, callback) {
     }); 
 }
 
-function getLock(account, callback) {
-    console.log ("Getting lock for account " + account);
-
-    var client = redisHelper.connectToRedis(REDIS_URL);
-    client.get (getLockKey (account), function (err, reply) {
-        if (reply == null) {
-            console.log ("==> Lock not found for account " + account);
-            lock = 0;
-        } else {
-            console.log ("Found lock: " + reply.toString());
-            lock = reply;
-        }
-        callback (lock);
-        client.quit();
-    }); 
-
-}
-
-
 function buildResult (res, balance) {
     console.log ("Building result balance: " + balance);
     result = { "balance" : balance };
@@ -151,9 +132,7 @@ function updateBalance(res, account, delta) {
         console.log ("Original balance: " + balance);
         balance += parseInt(delta);
         console.log ("New balance: " + balance);
-        persistBalance (account, balance);
-        unlock (account);
-        res.send ("Account updated");
+        persistBalance (res, account, balance);
     });
 }
 
@@ -182,28 +161,9 @@ function update(req, res) {
 function lock(req, res) {
     account = req.params.account;
     console.log ("Locking account " + account);
-    getLock (account, function (timestamp) {
-        console.log ("Account " + account + " timestamp: " + timestamp);
 
-        var currentTime = new Date().getTime();
-        if (timestamp != 0) {
-            console.log ("==> Timestamp: " + timestamp + " currentTime: " + currentTime);
-
-            // Adding 2 minutes to the lock timestamp
-            var expiration = Number(timestamp) + 2 * 60 * 1000;
-            console.log ("Expiration: " + expiration);
-            if (currentTime > expiration) {
-                console.log ("===> Canceling old lock");
-                persistLock (account, new Date().getTime());
-                res.send ("Account " + account + " locked");
-            } else {
-                res.status(400).send ("Account " + account + " already locked timestamp: " + timestamp);
-            }
-        } else {
-            persistLock (account, new Date().getTime());
-            res.send ("Account " + account + " locked");
-        }
-    })
+    console.log ("== TBD ===");
+    res.send ("Account locked");
 }
 
 function createAccountTable() {
