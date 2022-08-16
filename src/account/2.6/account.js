@@ -32,8 +32,12 @@ function getBalance(account, callback) {
             console.log ("==> Balance not found for account " + account);
             balance = -4545;
         } else {
-            console.log ("Found results: " + results.toString());
-            balance = parseInt(results.toString());
+            console.log ("Found results: " + JSON.stringify(results));
+            result = results[0]
+            console.log ("Found result: " + JSON.stringify(result));
+            console.log ("Found balance: " + JSON.stringify(result['BALANCE']));
+          
+            balance = result['BALANCE'];
         }
         callback (balance);
     }); 
@@ -116,7 +120,22 @@ function reset(req, res) {
 }
 
 function open(req, res) {
-    reset(req, res);
+    console.log ("Params: ");
+    console.log (req.params);
+    account = req.params.account;
+
+
+    connection.query("INSERT INTO ACCOUNT (ACCOUNT_NUMBER, BALANCE) VALUES (" + account + ", 0)", 
+    function(error, results, fields) {
+        if (error) {
+            throw error;
+        } else {
+            console.log ("Account created");
+            balance = parseInt(results.toString());
+        }
+        res.send ("Account created");
+    }); 
+
 }
 
 
