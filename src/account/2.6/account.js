@@ -7,7 +7,6 @@ const UPDATE_QUEUE = "update";
 var mysql = require('./mysql/mysql')
 var connection = mysql.connect();
 
-
 var logger = require('./logger/logger');
 
 const INITIAL_BALANCE = 100;
