@@ -9,7 +9,7 @@ image:
   pullPolicy: Always
 service:
   name: account-system
-  type: NodePort
+  type: LoadBalancer
   externalPort: 80
   internalPort: 80
 ingress:

@@ -2,13 +2,11 @@ var balance = 100;
 
 var accounts = [];
 
-var redisHelper = require('./redis/redisHelper');
-var REDIS_URL = "redis://microbank-account-system-redis";
-
 var queue = require('./queue/queue');
 const ACCOUNT_QUEUE = "accounts";
 
-var client = require('./rest_client/restClientHelper');
+var mysql = require('./mysql/mysql')
+var connection = mysql.connect();
 
 function get (req, res) {
     console.log ("Retrieving accounts");
@@ -34,15 +32,7 @@ function persistAccount (account) {
 
 function retrieveAccounts () {
     console.log ("Retrieving accounts");
-    var client = redisHelper.connectToRedis(REDIS_URL);
-    client.hkeys("accounts", function (err, replies) {
-        console.log ("Found " + replies.length + " accounts");
-        replies.forEach(function (reply, i) {
-            console.log ("Account: " + reply);
-            accounts.push(reply);
-        });
-        client.quit();
-   }) 
+    console.log ("== TBD ==");
 }
 
 function open(req, res) {
@@ -78,6 +68,19 @@ function reset(req, res) {
     res.send ("Accounts reset");
 }
 
+function createAccountSystemTable() {
+    stmt = "CREATE TABLE ACCOUNT_SYSTEM (ACCOUNT_NUMBER INTEGER PRIMARY KEY)"
+    connection.query(stmt, function (error, result) {
+        if (error) {
+            console.log ("Error: ", error);
+        }
+        console.log ("Table created");
+    })
+}
+
+
+
+createAccountSystemTable();
 retrieveAccounts();
 
 module.exports = {
