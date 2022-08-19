@@ -32,7 +32,13 @@ function persistAccount (account) {
 
 function retrieveAccounts () {
     console.log ("Retrieving accounts");
-    console.log ("== TBD ==");
+    stmt = "SELECT * FROM ACCOUNT_SYSTEM"
+    connection.query(stmt, function (error, result) {
+        if (error) {
+            console.log ("Error: ", error);
+        }
+        console.log ("Result: ", result);
+    })
 }
 
 function open(req, res) {

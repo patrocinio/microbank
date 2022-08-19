@@ -7,7 +7,7 @@ function connect () {
     host     : 'microbank-account-system-mysql',
     user     : 'root',
     password : 'admin',
-    database : 'account'
+    database : 'account-system'
   });
 
   connection.connect();
