@@ -5,6 +5,7 @@
         "express": "*",
         "body-parser": "*",
         "amqplib": "*",
-        "mysql": "*"
+        "mysql": "*",
+        "node-rest-client": "*"
     }
 }

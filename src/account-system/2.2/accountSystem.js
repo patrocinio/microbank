@@ -8,6 +8,8 @@ const ACCOUNT_QUEUE = "accounts";
 var mysql = require('./mysql/mysql')
 var connection = mysql.connect();
 
+var client = require('./rest_client/restClientHelper');
+
 function get (req, res) {
     console.log ("Retrieving accounts");
     console.log ("accounts: " + accounts);
@@ -24,10 +26,20 @@ function hasAccount (account) {
 
 function persistAccount (account) {
     console.log ("Persisting account " + account);
-    var client = redisHelper.connectToRedis(REDIS_URL);
-    var redis = redisHelper.getRedis();
-    client.hset ("accounts", account, "1", redis.print);
-    client.quit();
+    stmt = "INSERT INTO ACCOUNT_SYSTEM (ACCOUNT_NUMBER) VALUES (" + account + ")";
+    connection.query(stmt, function (error, result) {
+        if (error) {
+            console.log ("Error: ", error);
+        }
+        console.log ("Account " + account + " created");
+    })
+
+}
+
+function buildResult(result) {
+    result.forEach(row => console.log(accounts.push(row.ACCOUNT_NUMBER)))
+
+    console.log ("buildResult accounts: ", accounts)
 }
 
 function retrieveAccounts () {
@@ -38,6 +50,7 @@ function retrieveAccounts () {
             console.log ("Error: ", error);
         }
         console.log ("Result: ", result);
+        buildResult(result);
     })
 }
 
